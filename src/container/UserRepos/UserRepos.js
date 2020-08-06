@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner';
 import * as userActions from '../../actions/userActions';
 import getItem from '../../services/getItem';
 import Repo from '../../components/Repo/Repo';
-import Button from '../../components/common/button/button';
+import Button from '../../components/common/Button/Button';
 import SearchBar from '../../components/common/SearchBar/SearchBar';
 
 import './UserRepos.css';
