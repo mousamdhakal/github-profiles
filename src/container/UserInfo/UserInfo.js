@@ -3,52 +3,56 @@ import { Link } from 'react-router-dom';
 
 import './UserInfo.css';
 
-function UserInfo(props) {
+/**
+ * Displays the user info
+ * @param {Object} user User passed to Userinfo object
+ */
+function UserInfo({ user }) {
   return (
     <div className="user__info">
       <div className="user__personal-info clearfix">
-        <img className="user__image" src={props.user.avatar_url} alt="Profile" />
+        <img className="user__image" src={user.avatar_url} alt="Profile" />
         <div className="user__name-container">
-          <h2>{props.user.name}</h2>
-          <span>{props.user.login}</span>
+          <h2>{user.name}</h2>
+          <span>{user.login}</span>
         </div>
       </div>
-      <p className="user__bio">{props.user.bio}</p>
+      <p className="user__bio">{user.bio}</p>
       <div className="user__activity">
         <Link
           to={{
-            pathname: `${props.user.login}/followers`,
+            pathname: `${user.login}/followers`,
             aboutProps: {
               title: 'Followers',
-              name: props.user.name,
-              link: props.user.followers_url
+              name: user.name,
+              link: user.followers_url
             }
           }}
           className="user__friends user__friends--followers"
         >
           <i className="fas fa-user-friends"></i>
-          <span className="user__number">{props.user.followers} </span>
+          <span className="user__number">{user.followers} </span>
           followers
         </Link>
         <Link
           to={{
-            pathname: `${props.user.login}/following`,
+            pathname: `${user.login}/following`,
             aboutProps: {
               title: 'Following',
-              name: props.user.name,
-              link: props.user.following_url
+              name: user.name,
+              link: user.following_url
             }
           }}
           className="user__friends user__friends--following"
         >
           <i className="fas fa-user-friends"></i>
-          <span className="user__number">{props.user.following}</span>
+          <span className="user__number">{user.following}</span>
           following
         </Link>
       </div>
-      {props.user.location ? (
+      {user.location ? (
         <p className="user__location">
-          <i className="fas fa-map-marker-alt"></i> {props.user.location}
+          <i className="fas fa-map-marker-alt"></i> {user.location}
         </p>
       ) : null}
     </div>

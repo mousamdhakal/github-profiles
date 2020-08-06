@@ -9,6 +9,11 @@ import UserInfo from '../../container/UserInfo/UserInfo';
 import UserRepos from '../../container/UserRepos/UserRepos';
 import './UserProfile.css';
 
+/**
+ * Shows profile of inidividual user on screen
+ *
+ * @returns { Component }
+ */
 class UserProfile extends Component {
   constructor() {
     super();
@@ -18,17 +23,26 @@ class UserProfile extends Component {
     };
   }
 
+  /**
+   * Toggle the loading flag in state
+   */
   toggleLoading = () => {
     this.setState({
       isLoading: !this.state.isLoading
     });
   };
 
+  /**
+   * Show not found page on bad request
+   */
   onLoadFail = () => {
     const { history } = this.props;
     history.push(`/error/notfound`, null);
   };
 
+  /**
+   * Get the info related to user from API and store in redux store on mounting of the component
+   */
   componentDidMount() {
     let userToFetch = this.props.match.params.user_id ? this.props.match.params.user_id : this.props.defaultUser;
     getItem(userToFetch, this.props.setInfo, this.toggleLoading, 'user', this.onLoadFail);

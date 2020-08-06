@@ -1,11 +1,17 @@
 import * as userActions from '../actions/userActions';
 
+// Initial state of the store which is empty
 const INITIAL_STATE = {
   users: null,
   info: null,
   repos: null
 };
 
+/**
+ * Reducer function to perform actions on the store
+ * @param {Object} state Current state of the store
+ * @param {Object} action Action to perform on the store
+ */
 function userReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case userActions.SET_INFO:

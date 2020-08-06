@@ -1,3 +1,8 @@
+/**
+ * Takes a time and returns the time passed since that time till now in easy to read format
+ * @param {Date} startTime
+ */
+
 function findTimePassed(startTime) {
   startTime = new Date(startTime);
   let parsedStartTime = Date.parse(startTime);
@@ -5,6 +10,7 @@ function findTimePassed(startTime) {
   parsedStartTime = Math.floor(parsedStartTime / 1000);
   endTime = Math.floor(endTime.getTime() / 1000);
   let seconds = endTime - parsedStartTime;
+
   if (seconds < 60) {
     return 'Updated ' + seconds + ' seconds ago';
   }

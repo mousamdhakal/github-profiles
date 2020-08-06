@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './Repo.css';
 import findTimePassed from '../../utils/findTimePassed';
 
-function Repo(props) {
+/**
+ * Display information about a particular repo
+ *
+ * @param {Object} repo Object with info of repo
+ * @returns { Component }
+ */
+function Repo({ repo }) {
   return (
     <div className="repo">
-      <a href={props.repo.html_url} className="repo__link">
-        {props.repo.name}
+      <a href={repo.html_url} className="repo__link">
+        {repo.name}
       </a>
       <div className="repo__info">
-        {props.repo.description ? (
+        {repo.description ? (
           <div className="repo__description">
-            <p>{props.repo.description}</p>
+            <p>{repo.description}</p>
           </div>
         ) : null}
-        {props.repo.language ? (
+        {repo.language ? (
           <span className="repo__language">
-            <span className="repo__language-circle"></span> {props.repo.language}
+            <span className="repo__language-circle"></span> {repo.language}
           </span>
         ) : null}
-        <span className="repo__updated">{findTimePassed(props.repo.updated_at)}</span>
+        <span className="repo__updated">{findTimePassed(repo.updated_at)}</span>
       </div>
     </div>
   );

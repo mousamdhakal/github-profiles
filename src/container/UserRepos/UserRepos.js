@@ -6,10 +6,15 @@ import * as userActions from '../../actions/userActions';
 import getItem from '../../services/getItem';
 import Repo from '../../components/Repo/Repo';
 import Button from '../../components/common/button/button';
-import SearchBar from '../../components/SearchBar/SearchBar';
+import SearchBar from '../../components/common/SearchBar/SearchBar';
 
 import './UserRepos.css';
 
+/**
+ * Display the repos of the user
+ *
+ * @returns { Component }
+ */
 class UserRepos extends Component {
   constructor() {
     super();
@@ -21,12 +26,19 @@ class UserRepos extends Component {
     };
   }
 
+  /**
+   * Toggle the loading flag in the state
+   */
   toggleLoading = () => {
     this.setState({
       isLoading: !this.state.isLoading
     });
   };
 
+  /**
+   * Fetches the repos from the API and sets the same on redux store
+   * @param {Number} number Number of repos to fetch
+   */
   getRepos = (number) => {
     getItem(
       `${this.props.info.repos_url}?page=${this.state.pageNumber}&per_page=${number}&sort=updated&direction=desc`,
@@ -35,6 +47,10 @@ class UserRepos extends Component {
     );
   };
 
+  /**
+   * Handles the click of navigation buttons by moing to left or right
+   * @param {String} direction Direction to move to in navigation , 'left' or 'right'
+   */
   handleClick = (direction) => {
     if (direction === 'left') {
       let pageNumber = this.state.pageNumber < 2 ? null : this.state.pageNumber - 1;
@@ -57,18 +73,30 @@ class UserRepos extends Component {
     }
   };
 
+  /**
+   * Hanldes the submit of search form for repos by searching on all repos
+   * @param {Object} e Event object
+   */
   handleSubmit = (e) => {
     e.preventDefault();
     this.getRepos(this.props.info.public_repos);
     this.setState({ pageNumber: 'All results' });
   };
 
+  /**
+   * Handles the change of text in search form by setting the searchQuery in state to same
+   * @param {Object} e Event Object
+   */
   handleChange = (e) => {
     this.setState({
       searchQuery: e.target.value
     });
   };
 
+  /**
+   * If search form is submitted, filters the repos according to search text
+   * @param {Array} repos List of repos
+   */
   filterSearch = (repos) => {
     if (this.state.pageNumber === 'All results') {
       return repos.filter((repo) => {
@@ -81,6 +109,9 @@ class UserRepos extends Component {
     return repos;
   };
 
+  /**
+   * Reset the repos on redux store and fetch 30 repos from API on mounting of the component
+   */
   componentDidMount() {
     this.props.setRepos(null);
     if (!this.props.repos && this.props.info) {

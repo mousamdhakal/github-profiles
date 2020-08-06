@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 
 import './UserCard.css';
 
+/**
+ * Display user Info card
+ *
+ * @param {Object} user User whose inforamtion is to be displayed
+ * @returns {Component}
+ */
 function UserCard({ user }) {
   return (
     <div className="user-card">

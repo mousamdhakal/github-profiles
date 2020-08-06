@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import './Header.css';
-import SearchBar from '../../components/SearchBar/SearchBar';
+import SearchBar from '../../components/common/SearchBar/SearchBar';
 
+/**
+ * Header for the page which is common in all routes
+ *
+ * @returns { Component }
+ */
 class Header extends Component {
   constructor() {
     super();
@@ -13,10 +18,18 @@ class Header extends Component {
     };
   }
 
+  /**
+   * Sets the searchText in state to equialent to that of searchbar
+   * @param {Object} e Event Object
+   */
   handleChange = (e) => {
     this.setState({ searchText: e.target.value });
   };
 
+  /**
+   * Update the current route to search for users passing the searchText in store
+   * @param {Object} e Event Object
+   */
   handleSubmit = (e) => {
     const { history } = this.props;
     e.preventDefault();
