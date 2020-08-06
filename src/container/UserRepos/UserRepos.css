@@ -1,0 +1,46 @@
+.user__repos {
+  float: right;
+  width: 100%;
+}
+
+.repos__title {
+  font-size: 14px;
+  padding:20px 0 ;
+  border-bottom: 1px solid var(--magenta-dye);
+}
+
+.repos__icon {
+  margin-right: 10px;
+}
+
+.repos__count {
+  margin-left: 5px;
+  background-color: var(--celeste);
+  border-radius: 15px;
+  padding: 0 10px;
+}
+
+.repos__nav {
+  text-align: center;
+}
+
+.repos__search {
+  width: 100%;
+}
+
+.repos__search .repos__searchbar {
+  color: var(--black-coffee);
+}
+
+.repos__page-number {
+  position: relative;
+  bottom: 9px;
+}
+
+@media (min-width: 768px){
+  .user__repos {
+    margin-left: 30px;
+    width: calc(75% - 30px);
+  }
+
+}

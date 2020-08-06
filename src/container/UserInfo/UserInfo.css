@@ -1,0 +1,77 @@
+.user__info {
+  float: left;
+  width: 100%;
+}
+
+.user__personal-info {
+  margin: 15px 0;
+  color: var(--indigo-dye);
+  display: flex;
+  align-items: center;
+}
+
+.user__image {
+  border-radius: 50%;
+  float: left;
+  width: 20%;
+}
+
+
+.user__name-container {
+  margin-left: 20px;
+  width: calc(80% - 20px);
+  float: left;
+}
+
+.user__bio {
+  font-size: 18px;
+}
+
+.user__location {
+  margin: 10px 0;
+}
+
+.user__activity {
+  margin: 5px 0;
+}
+
+.user__number {
+  font-weight: bold;
+  display: inline-block;
+  margin: 5px;
+}
+
+.user__friends {
+  text-decoration: none;
+  color: var(--celadon-blue);
+}
+
+.user__friends:hover {
+  color: var(--brick-red);
+}
+
+.user__friends--following {
+  margin-left: 15px;
+}
+
+@media (min-width: 768px){
+  .user__info {
+    width: 25%;
+  }
+
+  .user__personal-info {
+    display: block;  
+  }
+
+  .user__image {
+    width: 100%;
+    display: block;
+  }
+
+  .user__name-container {
+    width: 100%;
+    display: block;
+    margin: 15px 0 0 0;
+  }
+
+}

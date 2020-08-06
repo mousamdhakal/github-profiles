@@ -1,0 +1,10 @@
+.btn {
+  background-color: transparent;
+  border: none;
+}
+
+.btn-nav {
+  font-size: 40px;
+  margin: 0 15px;
+  cursor: pointer;
+}

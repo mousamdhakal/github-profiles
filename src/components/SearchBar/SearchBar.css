@@ -1,0 +1,22 @@
+.search {
+  padding: 6px;
+}
+
+.search__input {
+  background-color: transparent;
+  color: var(--misty-rose);
+  border: none;
+  width: 250px;
+  font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .search {
+    padding: 9px 0;
+  }
+
+  .search__input {
+    width: 280px;
+    font-size: 25px;
+  }
+}

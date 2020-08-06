@@ -1,0 +1,25 @@
+:root {
+  --brick-red: hsla(349, 53%, 50%, 1);
+  --indigo-dye: hsla(207, 50%, 29%, 1);
+  --celadon-blue: hsla(200, 44%, 39%, 1);
+  --sky-blue-crayola: hsla(187, 75%, 75%, 1);
+  --celeste: hsla(170, 74%, 82%, 1);
+
+  --magenta-dye: hsla(327, 89%, 44%, 1);
+  --misty-rose: hsla(12, 100%, 93%, 1);
+  --baby-pink: hsla(9, 39%, 77%, 1);
+  --laurel-green: hsla(84, 15%, 62%, 1);
+  --black-coffee: hsla(337, 13%, 20%, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.clearfix:after {
+  display: table;
+  content: "";
+  clear: both;
+}

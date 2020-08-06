@@ -1,0 +1,40 @@
+.header {
+  background-color: var(--magenta-dye);
+}
+
+.header__brand {
+  float: left;
+  margin: 20px 0;
+  margin-left: 10px;
+}
+
+.header__link {
+  font-size: 30px;
+  text-decoration: none;
+  color: var(--misty-rose);
+}
+
+.header__searchbar {
+  margin-left: 10px;
+  float: left;
+  position: relative;
+  bottom: 12px;
+  border-radius: 5px;
+}
+
+@media (min-width:768px){
+  .header__link {
+    font-size: 35px;
+  }
+
+  .header__brand {
+    margin-left: 12px;
+  }
+
+  .header__searchbar {
+    float: right;
+    width: 30%;
+    bottom: 0px;
+    top: 20px;
+  }
+}

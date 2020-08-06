@@ -1,0 +1,19 @@
+.users__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.users__notice {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.users__title {
+  text-align: center;
+  font-size: 18px;
+  color: var(--indigo-dye);
+  margin: 10px 0;
+}
