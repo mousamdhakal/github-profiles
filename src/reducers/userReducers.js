@@ -3,8 +3,7 @@ import * as userActions from '../actions/userActions';
 // Initial state of the store which is empty
 const INITIAL_STATE = {
   users: null,
-  info: null,
-  repos: null
+  info: null
 };
 
 /**
@@ -19,9 +18,6 @@ function userReducer(state = INITIAL_STATE, action) {
 
     case userActions.SET_USERS:
       return { ...state, users: action.payload };
-
-    case userActions.SET_REPOS:
-      return { ...state, repos: action.payload };
 
     default:
       return state;

@@ -7,7 +7,10 @@
   color: var(--misty-rose);
   border: none;
   width: 250px;
-  font-size: 20px;
+  font-size: 15px;
+  padding: 8px 5px 10px 10px;
+  border-radius: 10px;
+  background-color: rgba(58, 44, 49,0.3);
 }
 
 @media (min-width: 768px) {
@@ -17,6 +20,6 @@
 
   .search__input {
     width: 280px;
-    font-size: 25px;
+    font-size: 18px;
   }
 }

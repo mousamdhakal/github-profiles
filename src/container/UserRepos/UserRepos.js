@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
-import * as userActions from '../../actions/userActions';
+import * as reposActions from '../../actions/reposActions';
 import getItem from '../../services/getItem';
 import Repo from '../../components/Repo/Repo';
 import Button from '../../components/common/Button/Button';
@@ -55,32 +55,35 @@ class UserRepos extends Component {
     if (direction === 'left') {
       let pageNumber = this.state.pageNumber < 2 ? null : this.state.pageNumber - 1;
       if (pageNumber) {
-        this.setState({ pageNumber }, () => {
-          this.getRepos();
-        });
+        this.setState({ pageNumber });
         return;
       }
       return;
     }
     if (direction === 'right') {
-      let pageNumber = this.state.pageNumber * 30 >= this.props.info.public_repos ? null : this.state.pageNumber + 1;
+      let pageNumber =
+        this.state.pageNumber * 10 >=
+        (this.props.filteredRepos ? this.props.filteredRepos.length : this.props.repos.length)
+          ? null
+          : this.state.pageNumber + 1;
       if (pageNumber) {
-        this.setState({ pageNumber }, () => {
-          this.getRepos();
-        });
+        this.setState({ pageNumber });
         return;
       }
     }
   };
 
   /**
-   * Hanldes the submit of search form for repos by searching on all repos
+   * Hanldes the submit of search form for repos by filtering the search and setting apge number to 1 for search results
+   *
    * @param {Object} e Event object
    */
   handleSubmit = (e) => {
     e.preventDefault();
-    this.getRepos(this.props.info.public_repos);
-    this.setState({ pageNumber: 'All results' });
+    this.filterSearch(this.props.repos);
+    this.setState({
+      pageNumber: 1
+    });
   };
 
   /**
@@ -94,28 +97,27 @@ class UserRepos extends Component {
   };
 
   /**
-   * If search form is submitted, filters the repos according to search text
+   * Filters the repos according to search result and returns it
    * @param {Array} repos List of repos
    */
   filterSearch = (repos) => {
-    if (this.state.pageNumber === 'All results') {
-      return repos.filter((repo) => {
-        let repoText = repo.name.toLowerCase();
-        let searchText = this.state.searchQuery.toLowerCase();
-        return repoText.includes(searchText);
-      });
-    }
-
-    return repos;
+    let filteredRepos = repos.filter((repo) => {
+      let repoText = repo.name.toLowerCase();
+      let searchText = this.state.searchQuery.toLowerCase();
+      return repoText.includes(searchText);
+    });
+    this.props.setFilteredRepos(filteredRepos);
+    return filteredRepos;
   };
 
   /**
-   * Reset the repos on redux store and fetch 30 repos from API on mounting of the component
+   * Reset the repos and filteredrepos on redux store and fetch 30 repos from API on mounting of the component
    */
   componentDidMount() {
     this.props.setRepos(null);
+    this.props.setFilteredRepos(null);
     if (!this.props.repos && this.props.info) {
-      this.getRepos(30);
+      this.getRepos(this.props.info.public_repos);
     }
   }
 
@@ -143,16 +145,18 @@ class UserRepos extends Component {
           {this.state.isLoading || !this.props.repos ? (
             <Loader type="TailSpin" color="#D40C7A" height={50} width={50} />
           ) : (
-            this.filterSearch(this.props.repos).map((repo) => <Repo key={repo.id} repo={repo} />)
+            (this.props.filteredRepos ? this.props.filteredRepos : this.props.repos)
+              .slice((this.state.pageNumber - 1) * 10, this.state.pageNumber * 10)
+              .map((repo) => <Repo key={repo.id} repo={repo} />)
           )}
         </div>
         <div className="repos__nav">
           <Button className="btn-nav" onClick={() => this.handleClick('left')}>
-            <i className="fas fa-caret-left"></i>
+            <i className="btn-icon fas fa-caret-left"></i>
           </Button>
           <span className="repos__page-number">{this.state.pageNumber}</span>
           <Button className="btn-nav" onClick={() => this.handleClick('right')}>
-            <i className="fas fa-caret-right"></i>
+            <i className="btn-icon fas fa-caret-right"></i>
           </Button>
         </div>
       </div>
@@ -161,13 +165,16 @@ class UserRepos extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { info: state.user.info, repos: state.user.repos };
+  return { info: state.user.info, repos: state.repo.repos, filteredRepos: state.repo.filteredRepos };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setRepos: (repos) => {
-      dispatch(userActions.setRepos(repos));
+      dispatch(reposActions.setRepos(repos));
+    },
+    setFilteredRepos: (repos) => {
+      dispatch(reposActions.setFilteredRepos(repos));
     }
   };
 };
